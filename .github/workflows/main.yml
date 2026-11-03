@@ -21,7 +21,7 @@ jobs:
         submodules: recursive
 
     - name: Set up CMake
-      uses: jvmmd/setup-cmake@v1
+      uses: mlocati/setup-cmake@v3
 
     - name: Configure CMake
       run: cmake -B build -DCMAKE_BUILD_TYPE=Release
