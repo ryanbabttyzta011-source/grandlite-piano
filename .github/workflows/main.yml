@@ -8,27 +8,23 @@ on:
 
 jobs:
   build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+    name: Build on Windows
+    runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - name: Set up CMake
-      uses: jwlawler/setup-cmake@v2
-    - name: Configure CMake
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
-    - name: Build Plugin
-      run: cmake --build build --config Release
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: VST-Plugin-${{ matrix.os }}
-        path: build/bin/Release/
+      - name: Build Plugin
+        run: cmake --build build --config Release
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: VST-Plugin-Windows
+          path: build/bin/Release/
